@@ -1,13 +1,21 @@
-import { HeaderComponent } from "./components/HeaderComponent";
-import { MainComponent } from "./components/MainComponent";
-import { FooterComponent } from "./components/FooterComponent";
+import { MainPage } from "./pages/MainPage";
+import HomePage from "./pages/HomePage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DefaultLayout from "./pages/DefaultLayout";
+import Contact from "./pages/Contact";
 function App() {
   return (
-    <>
-      <HeaderComponent />
-      <MainComponent />
-      <FooterComponent />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route Component={DefaultLayout}>
+          <Route index Component={HomePage} />
+          <Route path="/contact" Component={Contact} />
+          <Route path="/books">
+            <Route index Component={MainPage} />
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

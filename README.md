@@ -41,3 +41,17 @@ rules: {
 
 
 ```
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+   <BrowserRouter>
+      <Routes>
+        <Route Component={DefaultLayout}>
+          <Route path="/" Component={HomePage} />
+          <Route path="/books" > 👈
+            <Route index Component={MainPage} /> 👈
+            <Route path=":id" Component={BookPage} /> 👈
+            <Route path="create" Component={AddPizzaPage} /> 👈
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>

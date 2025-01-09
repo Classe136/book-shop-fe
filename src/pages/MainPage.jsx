@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import CardComponent from "./CardComponent";
+import CardComponent from "../components/CardComponent";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const bookEndPoint = "/books";
 
-export const MainComponent = () => {
+export const MainPage = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(getData, []);
