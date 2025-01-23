@@ -19,13 +19,17 @@ npm run dev
  # cancello il contenuto di App.jsx e rimuovo gli import che non mi servono
  # cancello i file che non mi servono
 
- #se voglio importo bootstrap in main.jsx prima del mio css custom 
+ #se voglio importo bootstrap in main.jsx prima del mio css custom
+   ```
+
+```javascript 
  import "bootstrap/dist/css/bootstrap.min.css";
+  ```
+ comincio ad editare App.jsx
 
- # comincio ad editare App.jsx
 
-
-# add to rules in eslint
+### Add to rules in eslint
+```javascript
 rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
@@ -41,6 +45,9 @@ rules: {
 
 
 ```
+### Routing
+
+```javascript
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
    <BrowserRouter>
@@ -55,3 +62,57 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
         </Route>
       </Routes>
     </BrowserRouter>
+    
+```
+### Context
+```javascript
+import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const GlobalContext = createContext();
+
+const GlobalProvider = ({ children }) => {
+  const [movies, setMovies] = useState([]);
+  
+  useEffect(getData, []);
+  
+  function getData() {
+    setLoading(true);
+    axios
+      .get(apiUrl + endpoint)
+      .then((res) => {
+        setMovies(res.data.results);       
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+  
+  const data = {
+    movies
+  };
+  return (
+    <GlobalContext.Provider value={data}>{children}</GlobalContext.Provider>
+  );
+};
+
+function useGlobalContext() {
+  const context = useContext(GlobalContext);
+  return context;
+}
+
+export { GlobalProvider, useGlobalContext };
+
+```
+
+In App.jsx use global context
+```javascript
+<GlobalProvider>
+  /* Routing o altri componenti children */
+ </GlobalProvider>
+```
