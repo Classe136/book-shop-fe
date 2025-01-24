@@ -15,7 +15,7 @@ export const MainPage = () => {
     axios
       .get(`${apiUrl}${bookEndPoint}`)
       .then((res) => {
-        setBooks(res.data.results);
+        setBooks(res.data.items);
       })
       .catch((error) => {
         console.log(error);
