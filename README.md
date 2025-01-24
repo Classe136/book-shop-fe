@@ -14,7 +14,7 @@ npm run dev
 
 # apro il .gitignore e aggiungo package-lock.json
 
- # installo gli altri pacchetti che mi servono (bootstrap,axios)
+ # installo gli altri pacchetti che mi servono (bootstrap,axios, react-router-dom)
 
  # cancello il contenuto di App.jsx e rimuovo gli import che non mi servono
  # cancello i file che non mi servono
@@ -25,8 +25,7 @@ npm run dev
 ```javascript 
  import "bootstrap/dist/css/bootstrap.min.css";
   ```
- comincio ad editare App.jsx
-
+ Comincio ad editare App.jsx
 
 ### Add to rules in eslint
 ```javascript
@@ -48,6 +47,28 @@ rules: {
 ### Routing
 
 ```javascript
+
+// in default layout es.
+import { Outlet } from "react-router-dom";
+
+import HeaderComponent from "../components/HeaderComponent";
+import Alert from "../components/Alert";
+import FooterComponent from "../components/FooterComponent";
+export default function DefaultLayout() {
+  return (
+    <div>
+      <HeaderComponent />
+      <Alert />
+      <main className="container">
+        <Outlet />
+      </main>
+
+      <FooterComponent />
+    </div>
+  );
+}
+
+// in app.jsx es.
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
    <BrowserRouter>
