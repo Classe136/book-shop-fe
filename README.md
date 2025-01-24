@@ -14,7 +14,7 @@ npm run dev
 
 # apro il .gitignore e aggiungo package-lock.json e .env
 
- # installo gli altri pacchetti che mi servono (bootstrap,axios, react-router-dom)
+ # installo gli altri pacchetti che mi servono (bootstrap,axios, react-router-dom, react-icons)
 
  # cancello il contenuto di App.jsx e rimuovo gli import che non mi servono
  # cancello i file che non mi servono
@@ -136,4 +136,12 @@ In App.jsx use global context
 <GlobalProvider>
   /* Routing o altri componenti children */
  </GlobalProvider>
+```
+Usare icone
+[Docs react-icons](https://react-icons.github.io/react-icons/)
+
+```javascript
+import { FaStar, FaRegStar } from "react-icons/fa";
+
+ <FaStar />
 ```
