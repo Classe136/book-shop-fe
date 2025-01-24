@@ -68,7 +68,7 @@ export default function DefaultLayout() {
   );
 }
 
-// in app.jsx es.
+// in app.jsx esempio....
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
    <BrowserRouter>
