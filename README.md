@@ -12,7 +12,7 @@ npm install
 # testo
 npm run dev
 
-# apro il .gitignore e aggiungo package-lock.json
+# apro il .gitignore e aggiungo package-lock.json e .env
 
  # installo gli altri pacchetti che mi servono (bootstrap,axios, react-router-dom)
 
