@@ -6,7 +6,7 @@ import CardComponent from "../components/CardComponent";
 const apiUrl = import.meta.env.VITE_API_URL;
 const bookEndPoint = "/books";
 
-export const MainPage = () => {
+export const Books = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(getData, []);
@@ -24,31 +24,17 @@ export const MainPage = () => {
         console.log("Finito");
       });
   }
-  function deleteItem(e, id) {
-    e.preventDefault();
-    console.log(e);
-    //console.log("sono qui al libro " + data.title);
-    axios.delete(`${apiUrl}${bookEndPoint}/${id}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
-      getData();
-      //setBooks(books.filter((book) => book.id !== id));
-    });
-  }
+
   return (
-    <main className="container py-3">
+    <section className="container-fluid">
+      <h1>All Books</h1>
       <div className="row gy-4 ">
         {books.map((book) => (
           <div className="col-12 col-md-4 col-lg-3" key={book.id}>
-            <CardComponent
-              data={book}
-              onDeleteBook={(e) => {
-                deleteItem(e, book.id);
-              }}
-            />
+            <CardComponent data={book} />
           </div>
         ))}
       </div>
-    </main>
+    </section>
   );
 };

@@ -5,7 +5,9 @@ export default function DefaultLayout() {
   return (
     <>
       <HeaderComponent />
-      <Outlet />
+      <main className="container py-4">
+        <Outlet />
+      </main>
       <FooterComponent />
     </>
   );
