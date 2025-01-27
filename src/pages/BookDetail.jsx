@@ -26,7 +26,7 @@ export default function BookDetail() {
         //   type: "danger",
         //   message: "La pizza che cerci non esiste",
         // });
-        navigate("/notfound");
+        navigate("/notfound"); //navigate("/books");
       })
       .finally(() => {
         console.log("Finito");
