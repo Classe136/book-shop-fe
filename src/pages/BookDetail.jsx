@@ -11,8 +11,9 @@ const bookEndPoint = "/books";
 const imgPath = "http://localhost:3000/img/books/";
 export default function BookDetail() {
   const [book, setBook] = useState(null);
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
+
   useEffect(getData, [id]);
   function getData() {
     axios
