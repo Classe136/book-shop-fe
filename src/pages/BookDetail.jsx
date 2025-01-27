@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import ReviewComponent from "../components/ReviewComponent";
+import Stars from "../components/Stars";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const bookEndPoint = "/books";
@@ -65,7 +66,14 @@ export default function BookDetail() {
         </div>
       </section>
       <section className="container-fluid py-4">
-        <h4>Our community reviews</h4>
+        <div className="d-flex justify-content-between">
+          <h4>Our community reviews</h4>
+          <div>
+            <strong>Vote average </strong>
+            <Stars vote={book?.vote_average} />
+          </div>
+        </div>
+
         <div className="row">{renderReviews()}</div>
       </section>
     </>
