@@ -11,7 +11,7 @@ export const HeaderComponent = () => {
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
-            Navbar
+            <img src="/logo.jpg" alt="Logo" id="logo" />
           </NavLink>
           <button
             className="navbar-toggler"

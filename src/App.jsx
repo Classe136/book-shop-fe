@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DefaultLayout from "./pages/DefaultLayout";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
             <Route index Component={Books} />
             <Route path=":id" Component={BookDetail} />
           </Route>
+          <Route path="*" Component={NotFound} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -11,6 +11,7 @@ const imgPath = "http://localhost:3000/img/books/";
 export default function BookDetail() {
   const [book, setBook] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(getData, [id]);
   function getData() {
     axios
@@ -20,6 +21,12 @@ export default function BookDetail() {
       })
       .catch((error) => {
         console.log(error);
+        console.log(error);
+        // setAlertData({
+        //   type: "danger",
+        //   message: "La pizza che cerci non esiste",
+        // });
+        navigate("/notfound");
       })
       .finally(() => {
         console.log("Finito");

@@ -3,7 +3,10 @@ export default function CardComponent({ data }) {
   const imgPath = "http://localhost:3000/img/books/" + data.image;
   return (
     <div className="card">
-      <img src={`${imgPath}`} className="card-img-top" alt="immagine-libro" />
+      <div className="cardimage">
+        <img src={`${imgPath}`} className="card-img-top" alt="immagine-libro" />
+      </div>
+
       <div className="card-body">
         <h5 className="card-title">{data.title}</h5>
         <h6 className="text-muted">

@@ -1,0 +1,13 @@
+#logo {
+    width: 100px;
+}
+
+.cardimage {
+    aspect-ratio: 1/1.8;
+}
+
+.cardimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
