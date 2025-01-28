@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { useGlobalContext } from "../contexts/GlobalContext";
 import CardComponent from "../components/CardComponent";
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -8,10 +9,11 @@ const bookEndPoint = "/books";
 
 export const Books = () => {
   const [books, setBooks] = useState([]);
-
+  const { setIsLoading } = useGlobalContext();
   useEffect(getData, []);
 
   function getData() {
+    setIsLoading(true);
     axios
       .get(`${apiUrl}${bookEndPoint}`)
       .then((res) => {
@@ -22,6 +24,7 @@ export const Books = () => {
       })
       .finally(() => {
         console.log("Finito");
+        setIsLoading(false);
       });
   }
 

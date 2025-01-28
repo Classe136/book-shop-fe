@@ -3,8 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
+import { useGlobalContext } from "../contexts/GlobalContext";
 import ReviewComponent from "../components/ReviewComponent";
 import Stars from "../components/Stars";
+import FormReview from "../components/FormReview";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const bookEndPoint = "/books";
@@ -13,16 +15,16 @@ export default function BookDetail() {
   const [book, setBook] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const { setIsLoading } = useGlobalContext();
   useEffect(getData, [id]);
   function getData() {
+    setIsLoading(true);
     axios
       .get(`${apiUrl}${bookEndPoint}/${id}`)
       .then((res) => {
         setBook(res.data);
       })
       .catch((error) => {
-        console.log(error);
         console.log(error);
         // setAlertData({
         //   type: "danger",
@@ -32,6 +34,7 @@ export default function BookDetail() {
       })
       .finally(() => {
         console.log("Finito");
+        setIsLoading(false);
       });
   }
   function renderReviews() {
@@ -76,6 +79,9 @@ export default function BookDetail() {
         </div>
 
         <div className="row">{renderReviews()}</div>
+      </section>
+      <section className="container-fluid py-4">
+        <FormReview book_id={book?.id} reloadReviews={getData} />
       </section>
     </>
   );
