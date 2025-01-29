@@ -11,29 +11,38 @@ const bookEndPoint = "/books";
 
 export default function FormReview({ book_id, reloadReviews }) {
   const [formData, setFormData] = useState(initialData);
-  const [isFormValidated, setIsFormValideted] = useState(true);
+  //const [isFormValidated, setIsFormValideted] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
 
-  // function validateForm() {
-  //   if (!formData.text || !formData.name) return false;
-  //   if (isNaN(formData.vote) || formData.vote < 1 || formData.vote > 10)
-  //     return false;
-  //   return true;
-  // }
+  function validateForm() {
+    if (!formData.text || !formData.name) return false;
+    if (isNaN(formData.vote) || formData.vote < 1 || formData.vote > 10)
+      return false;
+    return true;
+  }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(e);
-    setIsFormValideted(true);
-    if (!e.target.checkValidity()) {
+    if (!validateForm()) {
+      setIsFormValid(false);
       return;
     }
+    //console.log(e);
+    //console.log(e.target.checkValidity());
+
+    //per validazione Vanilla
+    //setIsFormValideted(true);
+    // if (!e.target.checkValidity()) {
+    //   return;
+    // }
     // console.log("dati form ", formData);
     // console.log("id del libro ", book_id);
     axios
       .post(`${apiUrl}${bookEndPoint}/${book_id}/reviews`, formData)
       .then((res) => {
         console.log(res);
+        setIsFormValid(true);
         setFormData(initialData);
-        setIsFormValideted(false);
+        //setIsFormValideted(false);
         reloadReviews();
       })
       .catch((error) => {
@@ -58,17 +67,17 @@ export default function FormReview({ book_id, reloadReviews }) {
         <h5>Add your review</h5>
       </header>
       <div className="card-body">
-        {/* {!isFormValid && (
+        {!isFormValid && (
           <div className="alert alert-danger mb-3">
             The data in the form is not valid
           </div>
-        )} */}
+        )}
         <form
           onSubmit={handleSubmit}
-          className={` ${
-            isFormValidated ? "was-validated" : "needs-validation"
-          }`}
-          noValidate
+          // className={`needs-validation ${
+          //   isFormValidated ? "was-validated" : ""
+          // }`}
+          // noValidate
         >
           <div className="form-group">
             <label>Name</label>
@@ -78,7 +87,7 @@ export default function FormReview({ book_id, reloadReviews }) {
               className="form-control"
               value={formData.name}
               onChange={setFieldValue}
-              required
+              // required
             />
             <div className="valid-feedback">Looks good!</div>
             <div className="invalid-feedback">Please choose a username.</div>
@@ -90,7 +99,7 @@ export default function FormReview({ book_id, reloadReviews }) {
               name="text"
               value={formData.text}
               onChange={setFieldValue}
-              required
+              // required
             ></textarea>
           </div>
           <div className="form-group">
@@ -104,7 +113,7 @@ export default function FormReview({ book_id, reloadReviews }) {
               className="form-control"
               value={formData.vote}
               onChange={setFieldValue}
-              required
+              // required
             />
           </div>
           <div className="d-flex justify-content-end pt-3">
