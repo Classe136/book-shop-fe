@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import CardComponent from "../components/CardComponent";
+import Pager from "../components/Pager";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const bookEndPoint = "/books";
@@ -13,9 +14,9 @@ export const Books = () => {
   const [numPages, setNumPages] = useState(0);
   const [page, setPage] = useState(1);
   useEffect(getData, [page]);
-  function handleClick(page) {
-    console.log(page);
-    setPage(page);
+  function handleClick(numpage) {
+    console.log(numpage);
+    setPage(numpage);
   }
   function getData() {
     setIsLoading(true);
@@ -43,40 +44,11 @@ export const Books = () => {
             <CardComponent data={book} />
           </div>
         ))}
-        <nav className="col-12">
-          <ul className="pagination">
-            <li className={`page-item ${page <= 1 ? "disabled" : ""}`}>
-              <button
-                className="page-link"
-                onClick={() => handleClick(page - 1)}
-              >
-                Previous
-              </button>
-            </li>
-            {new Array(numPages).fill("").map((num, index) => (
-              <li
-                className={`page-item ${page === index + 1 ? "active" : ""} `}
-                aria-current="page"
-                key={index + 1}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => handleClick(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </li>
-            ))}
-            <li className={`page-item ${page >= numPages ? "disabled" : ""}`}>
-              <button
-                className="page-link"
-                onClick={() => handleClick(page + 1)}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
+        <Pager
+          page={page}
+          numPages={numPages}
+          onChangePage={(numpage) => handleClick(numpage)}
+        />
       </div>
     </section>
   );
